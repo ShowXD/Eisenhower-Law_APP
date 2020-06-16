@@ -2,8 +2,13 @@ package com.example.schedule
 
 import android.app.DatePickerDialog
 import android.app.TimePickerDialog
+import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.Gravity
+import android.view.View
+import android.widget.Toast
+import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.activity_add_matter_window.*
 import java.util.*
 
@@ -13,15 +18,6 @@ class AddMatterWindow : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         overridePendingTransition(0, 0)
         setContentView(R.layout.activity_add_matter_window)
-
-//        val alpha = 100
-//        val alphaColor = ColorUtils.setAlphaComponent(Color.parseColor("#000000"), alpha)
-//        val colorAnimation = ValueAnimator.ofObject(ArgbEvaluator(), Color.TRANSPARENT, alphaColor)
-//        colorAnimation.duration = 500
-//        colorAnimation.addUpdateListener {
-//                animator -> addMatter_background.setBackgroundColor(animator.animatedValue as Int)
-//        }
-//        colorAnimation.start()
 
         // 設置日期按鈕文字
         val c = Calendar.getInstance()
@@ -59,8 +55,11 @@ class AddMatterWindow : AppCompatActivity() {
         }
 
         // 設置新增按鈕
-        btn_add.setOnClickListener {
-
+        btn_add.setOnClickListener { view ->
+            Snackbar.make(view, "成功新增 ", Snackbar.LENGTH_LONG)
+                    .setAction("Action", null).show()
+            onSave()
+            onBackPressed()
         }
     }
 
@@ -76,5 +75,25 @@ class AddMatterWindow : AppCompatActivity() {
         } else {
             "下午${hour}:${minute}"
         }
+    }
+
+    // 創建儲存資料檔案
+    private fun onSave() {
+        // create file
+        val pref = getPreferences(Context.MODE_PRIVATE)
+        val editor = pref.edit()
+
+        // save name
+         editor.putString("Title", editText_title.text.toString())
+        // save date
+        editor.putString("Date", btn_date.text.toString())
+        // save time
+        editor.putString("Time", btn_time.text.toString())
+        // save important type
+        editor.putBoolean("Important", switch_important.isChecked)
+        // save urgent
+        editor.putBoolean("Urgent", switch_urgent.isChecked)
+        // commit change
+        editor.apply()
     }
 }

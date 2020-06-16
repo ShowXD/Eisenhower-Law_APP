@@ -8,7 +8,7 @@
     tools:context=".AddMatterWindow">
 
     <EditText
-        android:id="@+id/editTextTextPersonName"
+        android:id="@+id/editText_title"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
@@ -29,7 +29,7 @@
         app:layout_constraintBottom_toTopOf="@+id/textView4"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName" />
+        app:layout_constraintTop_toBottomOf="@+id/editText_title" />
 
     <TextView
         android:id="@+id/textView4"
@@ -40,7 +40,7 @@
         android:textAppearance="@style/TextAppearance.AppCompat.Body2"
         android:textSize="18sp"
         app:layout_constraintStart_toStartOf="@+id/guideline_left"
-        app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName" />
+        app:layout_constraintTop_toBottomOf="@+id/editText_title" />
 
     <Button
         android:id="@+id/btn_date"
